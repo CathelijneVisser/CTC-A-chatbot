@@ -1,0 +1,81 @@
+<section class="menu-bar">
+        <h2 class="title-zones">Smartzones</h2>
+
+        
+        <% smartzones.forEach(smartzone => { %>
+            <article class="sz-card">
+                <div class="card-left-side">
+                    <picture>
+                        <source srcset="<%- smartzone.image[0].originalAsWebP %>" type="image/webp">
+                        <img src="<%- smartzone.image[0].url %>" alt="Foto van de locatie van smartzone <%= smartzone.name %>" loading="lazy" width="112px" height="160px">
+                    </picture>
+                    <button class="info-icon" data-szId="<%= smartzone.id %>" aria-label="More information">
+                        <svg width="25" height="25" viewBox="0 0 21 21" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m8.92 8.6.05-.02a.98.98 0 0 1 1.14.13c.15.13.27.32.34.52.06.21.07.44.02.65l-1 4.33c-.05.21-.04.44.03.64.06.21.18.4.34.53a.98.98 0 0 0 1.13.13l.06-.03M9.97 5.61h.01v0h0v0ZM20 10.5a9.5 9.5 0 1 1-19 0 9.5 9.5 0 0 1 19 0Z" stroke="#656672" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="card-right-side">
+                    <div class="top-row">
+                        <p class="availability">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                <path d="M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="#524DD0" stroke-width="2"/>
+                                <path d="m6 11 3 3 5-7" stroke="#524DD0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Now available
+                        </p>
+                        <button class="favorite-button" aria-label="Make favorite">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 21 19" fill="none">
+                                <path d="M1 1h19v17H1z"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 5.64C0 2.46 2.73 0 5.95 0c1.8 0 3.45.77 4.55 2 1.1-1.23 2.74-2 4.55-2C18.27 0 21 2.46 21 5.64c0 4.15-2.64 7.49-5.08 9.7A26.7 26.7 0 0 1 11 18.88l-.03.01-.47-.88-.46.89h-.01l-.03-.02a8.38 8.38 0 0 1-.4-.23 26.7 26.7 0 0 1-4.52-3.3C2.64 13.14 0 9.8 0 5.65ZM10.5 18l-.46.89a1 1 0 0 0 .92 0L10.5 18Zm0-1.15a24.72 24.72 0 0 0 4.08-2.99c2.3-2.1 4.42-4.93 4.42-8.22C19 3.69 17.3 2 15.05 2c-1.66 0-3.05.94-3.64 2.23a1 1 0 0 1-1.82 0A3.97 3.97 0 0 0 5.95 2C3.7 2 2 3.69 2 5.64c0 3.29 2.11 6.13 4.42 8.23a24.71 24.71 0 0 0 4.08 2.98Z" fill="#524DD0"/>
+                            </svg> -->
+                            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 21 19">
+                                <path d="M20 5.64C20 3.08 17.78 1 15.05 1a4.97 4.97 0 0 0-4.55 2.82A4.97 4.97 0 0 0 5.95 1C3.22 1 1 3.08 1 5.64 1 13.08 10.5 18 10.5 18S20 13.08 20 5.64Z" stroke="#524DD0" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 5.64C0 2.46 2.73 0 5.95 0c1.8 0 3.45.77 4.55 2 1.1-1.23 2.74-2 4.55-2C18.27 0 21 2.46 21 5.64c0 4.15-2.64 7.49-5.08 9.7A26.7 26.7 0 0 1 11 18.88l-.03.01-.47-.88-.46.89h-.01l-.03-.02a8.38 8.38 0 0 1-.4-.23 26.7 26.7 0 0 1-4.52-3.3C2.64 13.14 0 9.8 0 5.65ZM10.5 18l-.46.89a1 1 0 0 0 .92 0L10.5 18Zm0-1.15a24.72 24.72 0 0 0 4.08-2.99c2.3-2.1 4.42-4.93 4.42-8.22C19 3.69 17.3 2 15.05 2c-1.66 0-3.05.94-3.64 2.23a1 1 0 0 1-1.82 0A3.97 3.97 0 0 0 5.95 2C3.7 2 2 3.69 2 5.64c0 3.29 2.11 6.13 4.42 8.23a24.71 24.71 0 0 0 4.08 2.98Z" fill="#524DD0"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- <% if (smartzone.reservation === null) { %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+                            <path d="M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="#524DD0" stroke-width="2"/>
+                            <path d="m6 11 3 3 5-7" stroke="#524DD0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Now available
+                        <% } else { %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none">
+                            <path d="M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM13 7l-3 3m-3 3 3-3m0 0 3 3m-3-3L7 7" stroke="#524DD0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Occupied
+                        <% } %> 
+                    </p> -->                    
+
+                    <h2>SZ <%= smartzone.name %></h2>
+
+                    <p><%= smartzone.address %>, <%= smartzone.town %></p>
+
+                    <p><span>Price:</span> € 1,00 / 15 min</p> <!-- Voor nu hard code omdat die gegevens nog ontbreken -->
+
+                    <div class="bottom-row-card">
+                        <div class="buttons">
+                            <a href="/book?id=<%= smartzone.id %>&time=now" class="button-book-now">Book now</a>
+                            <a href="/book?id=<%= smartzone.id %>" class="button-book-later">Book later</a>
+                        </div>
+                        <button class="search-button" aria-label="Locate on map" data-point="<%= smartzone.name %>" data-lat="bloop">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 15 19" fill="none">
+                                <path d="M10 7.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0v0Z" stroke="#524DD0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 7.8C14 14.28 7.5 18 7.5 18S1 14.28 1 7.8C1 6 1.68 4.27 2.9 3a6.36 6.36 0 0 1 4.6-2c1.72 0 3.38.72 4.6 2C13.32 4.26 14 6 14 7.8v0Z" stroke="#524DD0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article id="<%= smartzone.id %>" class="more-info">
+                <p><span>Size:</span> <%= smartzone.size %> parking spot</p>
+                <p><span>Utilization:</span> <%= smartzone.utilization %></p>
+                <p><span>Description:</span> <%- smartzone.description.html %></p>
+            </article>
+        <% }) %>
+ 
+    </section>

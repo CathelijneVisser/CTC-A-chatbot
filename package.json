@@ -1,0 +1,29 @@
+{
+  "name": "connecting-people-realtime-web-app",
+  "version": "1.0.0",
+  "description": "Sprint 11",
+  "main": "server.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CathelijneVisser/connecting-people-realtime-web-app.git"
+  },
+  "author": "Cathelijne en Celine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CathelijneVisser/connecting-people-realtime-web-app/issues"
+  },
+  "homepage": "https://github.com/CathelijneVisser/connecting-people-realtime-web-app#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}

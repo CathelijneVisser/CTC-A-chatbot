@@ -1,0 +1,62 @@
+<section class="book">
+    <h1>Book</h1>
+
+    <form action="/book" method="post">
+        <fieldset>
+            <legend>Location</legend>
+            <label for="zone">Select the smartzone:</label>
+            <select id="zone" name="smartzoneId" required>
+                <option value="hoi" disabled selected>Choose your zone</option>
+                <% smartzones.forEach(smartzone=> { %>
+                    <option value="<%= smartzone.id %>" <% if (smartzone.id==selectedSmartzoneId) { %>
+                        selected
+                        <% } %>>
+                            <%= smartzone.name %> (<%= smartzone.address %>, <%= smartzone.town %>)
+                    </option>
+                    <% }) %>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>When</legend>
+            <div class="form-date">
+                <div class="from-till">
+                    <label for="date-from">Select the starting date:</label>
+                    <input type="date" id="date-from" name="dateStart"
+                        min="<%= new Date().toISOString().split('T')[0] %>" required <% if (time=="now" ) { %>
+                    value="<%= new Date().toISOString().split('T')[0] %>"
+                        <% } %>>
+                </div>
+                <div class="from-till">
+                    <label for="date-till">Select the ending date:</label>
+                    <input type="date" id="date-till" name="dateEnd" min="<%= new Date().toISOString().split('T')[0] %>"
+                        required <% if (time=="now" ) { %>
+                    value="<%= new Date().toISOString().split('T')[0] %>"
+                        <% } %>>
+                </div>
+            </div>
+            <div class="form-time">
+                <div class="from-till">
+                    <label for="time-from">Select the starting time:</label>
+                    <input type="time" id="time-from" name="timeStart" required>
+                </div>
+                <div class="from-till">
+                    <label for="time-till">Select the ending time:</label>
+                    <input type="time" id="time-till" name="timeEnd" required>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Information</legend>
+            <label for="name">Your name:</label>
+            <input type="text" id="name" name="author" placeholder="Coding the Curbs" required>
+            <label for="e-mail">Your e-mail:</label>
+            <input type="email" id="e-mail" placeholder="info@ctc.com" required> <!-- Nog niet in API -->
+            <label for="car">The numberplate of the car you will be using:</label>
+            <input type="text" id="car" placeholder="A-B12-C3" required> <!-- Nog niet in API -->
+        </fieldset>
+
+        <button type="submit" value="Boek nu" class="submit-button">Confirm</button>
+    </form>
+</section>

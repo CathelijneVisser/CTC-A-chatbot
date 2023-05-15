@@ -1,0 +1,490 @@
+/***********************************************************************************************************************/
+/* Fonts */
+/***********************************************************************************************************************/
+
+@font-face {
+    font-family: "Rajhandi";
+    src: url("assets/fonts/Rajdhani-SemiBold.ttf") format("ttf"),
+        url("assets/fonts/Rajdhani-SemiBold.woff") format("woff");
+        font-weight: 600;
+}
+
+@font-face {
+    font-family: "Rajhandi";
+    src: url("assets/fonts/Rajdhani-Bold.ttf") format("ttf"),
+        url("assets/fonts/Rajdhani-Bold.woff") format("woff");
+        font-weight: 700;
+}
+
+@font-face {
+    font-family: "Rajhandi";
+    src: url("assets/fonts/Rajdhani-Regular.ttf") format("ttf"),
+        url("assets/fonts/Rajdhani-Regular.woff") format("woff");
+        font-weight: 400;
+}
+
+/***********************************************************************************************************************/
+/* Overall */
+/***********************************************************************************************************************/
+
+:root {
+    --purple-color: #524dd0;
+    /* --grey-color: #656672; Voor buttons niet beschikbaar*/
+    --gradient-color: linear-gradient(90deg, #524dd0 0%, #84389e 100%);
+    --black-color: #000;
+    --white-color: #fff;
+    --bg-blue: #d8e9f2;
+    --bg-grey: #f6f6fc;
+    --border-form: solid 1px var(--black-color);
+    --border-radius-form: 0.3rem;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Rajhandi, sans-serif;
+    font-size: 1em;
+    line-height: 1.4;
+    scroll-behavior: smooth;
+    color: var(--black-color);
+}
+
+/***********************************************************************************************************************/
+/* Custom scrollbar */
+/***********************************************************************************************************************/
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: var(--purple-color); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-color); 
+}
+
+/***********************************************************************************************************************/
+/* Basics */
+/***********************************************************************************************************************/
+
+html {
+    background-color: var(--bg-blue);
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--white-color);
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
+}
+
+span {
+    font-weight: 600;
+}
+
+header {
+    background-color: var(--bg-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem 0 0 0;
+}
+
+button {
+    border: none;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+/***********************************************************************************************************************/
+/* Lay-out */
+/***********************************************************************************************************************/
+
+body {
+    display: grid;
+    grid-template-columns: 25rem auto;
+    grid-template-rows: 7rem auto 4rem;
+}
+
+header {
+    grid-area: 1 / 1 / 2 / 2 ;
+}
+
+nav {
+    grid-area: 3 / 1 / 4 / 2 ;
+}
+
+.menu-bar {
+    grid-area: 2 / 1 / 3 / 2 ;
+}
+
+.map, .book {
+    grid-area: 1 / 2 / 4 / 3 ;
+}
+
+/***********************************************************************************************************************/
+/* Header */
+/***********************************************************************************************************************/
+
+.logo {
+    width: 5rem;
+    height: auto;
+}
+
+/***********************************************************************************************************************/
+/* Zones */
+/***********************************************************************************************************************/
+
+.menu-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    background-color: var(--bg-grey);
+    overflow-x: hidden;
+}
+
+.title-zones {
+    font-size: 1.8rem;
+    color: #bbbbbb;
+    margin-bottom: 1rem;
+}
+
+/* Tiles */
+
+.sz-card {
+    width: auto;
+    height: 10rem;
+    display: flex;
+    gap: 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    box-shadow: 1px 3px 2px #bbbbbb;
+    background-color: var(--white-color);
+    position: relative;
+    z-index: 1;
+}
+
+.sz-card:first-of-type {
+    margin-top: 0;
+}
+
+.sz-card img {
+    width: 7rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 1rem 0 0 1rem;
+}
+
+.card-right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15rem;
+    padding: 0.5rem;
+    padding-left: 0;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.availability {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+.bottom-row-card {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.button-book-now, .button-book-later, .submit-button, .submit-button::before {
+    background: var(--gradient-color);
+    color: var(--white-color);
+    border: none;
+    font-weight: 600;
+    border-radius: 1rem;
+    padding: 0 0.7rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-book-later {
+    background: var(--white-color);
+    color: var(--purple-color);
+    border: solid 2px var(--purple-color);
+}
+
+/* Icons */
+.info-icon {
+    cursor: pointer;
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+}
+
+.favorite-button, .search-button {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.heart-icon path:first-of-type {
+    fill: transparent;
+    transition: 0.2s;
+}
+
+.heart-animation {
+    animation: like 1s ease-in-out;
+}
+
+.heart-animation svg path:first-of-type {
+    fill: var(--purple-color);
+}
+
+.search-animation {
+    animation: search 1s ease-in-out;
+}
+
+/* More info slide */
+.more-info {
+    background-color: var(--white-color);
+    min-height: 10rem;
+    padding: 0.5rem 1rem;
+    padding-top: 4rem;
+    margin-top: -10rem;
+    border-radius: 1rem;
+    box-shadow: 1px 3px 2px #bbbbbb;
+    position: relative;
+    z-index: 0;
+    bottom: 0;
+    /* transform: translateY(-9rem); */
+    transition: margin 1s ease-in-out;
+    /* display: none; */
+}
+
+.more-info:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.show-more-info {
+    /* transform: translateY(-2rem); */
+    margin-top: -3rem;
+    /* display: block; */
+}
+
+.more-info p {
+    line-height: 1.7;
+}
+
+.more-info p:nth-of-type(3), .more-info p:nth-of-type(4) {
+    display: inline;
+}
+
+/***********************************************************************************************************************/
+/* Navigation */
+/***********************************************************************************************************************/
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    padding: 1rem 1.5rem;
+    justify-content: space-between;
+    background-color: var(--bg-grey);
+}
+
+.nav-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+/***********************************************************************************************************************/
+/* Map */
+/***********************************************************************************************************************/
+
+#map {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/***********************************************************************************************************************/
+/* Book */
+/***********************************************************************************************************************/
+
+.book {
+    padding: 2rem;
+    overflow-y: scroll;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+/* Form */
+
+fieldset:first-of-type {
+    margin-top: 0.5rem;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+legend {
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+label {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+}
+
+.form-date, .form-time {
+    display: flex;
+    width: 22rem;
+    justify-content: space-between;
+}
+
+.form-time {
+    margin-top: 2rem;
+}
+
+.from-till {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input types */
+
+select {
+    width: 22rem;
+    border: var(--border-form);
+    border-radius: var(--border-radius-form);
+    cursor: pointer;
+}
+
+input[type=date], [type=time] {
+    width: 8rem;
+    border: var(--border-form);
+    border-radius: var(--border-radius-form);
+    cursor: pointer;
+}
+
+input[type=text], [type=email] {
+    padding-left: 0.5rem;
+    border: var(--border-form);
+    border-radius: var(--border-radius-form);
+    max-width: 22rem;
+    cursor: text;
+}
+
+/* Invalid */
+
+input.invalid, select.invalid {
+    border: solid 2px red;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* Submit */
+
+.submit-button {
+    position: relative;
+    margin-top: 1rem;
+    height: calc(4rem - 1.2rem);
+    width: 22rem;
+    z-index: 1;
+}
+
+.submit-button::before {
+    position: absolute;
+    content: "";
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    background: var(--purple-color);
+    transition: opacity 0.3s linear;
+}
+
+.submit-button:hover::before {
+    opacity: 1;
+}
+
+/***********************************************************************************************************************/
+/* Animations */
+/***********************************************************************************************************************/
+
+@keyframes like {
+    0% {
+        scale: 1;
+    }
+
+    30% {
+        scale: 0.9;
+        rotate: -10deg;
+    }
+
+    60% {
+        scale: 1.2;
+        rotate: 5deg;
+    }
+
+    100% {
+        fill: var(--purple-color);
+        scale: 1;
+        rotate: 0;
+    }
+}
+
+@keyframes search {
+    0% {
+        transform: scaleY(1);
+    }
+
+    30% {
+        transform: scaleY(0.8);
+    }
+
+    60% {
+        transform: scaleY(1.1) translateY(-5px);
+    }
+
+    100% {
+        transform: scaleY(1) translateY(0);
+    }
+}
