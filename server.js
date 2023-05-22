@@ -75,7 +75,7 @@ server.post('/book', (request, response) => {
 
 
 //poortnummer instellen
-server.set("port", 8000)
+server.set("port", process.env.PORT || 8000)
 
 //start de server
 server.listen(server.get("port"), () => {
