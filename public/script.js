@@ -132,3 +132,10 @@ searchButton.forEach(button => {
 
     })
 });
+
+
+//Chatroom
+
+let ioServer = io()
+let messages = document.querySelector('section ul')
+let input = document.querySelector('input')

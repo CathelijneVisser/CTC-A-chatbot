@@ -1,6 +1,19 @@
-//import express en .env
+import * as path from 'path'
+
+import { Server } from 'socket.io'
+import { createServer } from 'http'
 import express from "express"
 import dotenv from 'dotenv'
+
+const app = express()
+const http = createServer(app)
+const ioServer = new Server(http, {
+  connectionStateRecovery: {
+    maxDisconnectionDuration: 2 * 60 * 1000,
+    skipMiddlewares: true,
+  },
+})
+
 
 //activeer .env
 dotenv.config()
@@ -9,7 +22,7 @@ dotenv.config()
 const server = express()
 
 //views en public instellen
-server.use(express.static("public"))
+server.use(express.static(path.resolve("public")))
 server.set("view engine", "ejs")
 server.set("views", "./views")
 
@@ -72,6 +85,29 @@ server.post('/book', (request, response) => {
     }
   })
 })
+
+
+//Chatbot
+let history = []
+const historySize = 20
+
+ioServer.on('connection', (client) => {
+  console.log(`user ${client.id} connected`)
+  client.emit('history', history)
+
+  client.on('message', (message) => {
+    while (history.length > historySize) {
+      history.shift()
+    }
+    history.push(message)
+    ioServer.emit('message', message)
+  })
+
+  client.on('disconnect', () => {
+    console.log(`user ${client.id} disconnected`)
+  })
+})
+
 
 
 //poortnummer instellen
