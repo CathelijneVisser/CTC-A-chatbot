@@ -78,7 +78,7 @@ server.post('/book', (request, response) => {
 server.set("port", process.env.PORT || 8000)
 
 //start de server
-server.listen(server.get("port"), () => {
+server.listen(server.get("port"), "0.0.0.0", () => {
   console.log(`Application started on http://localhost:${server.get("port")}`)
 })
 
