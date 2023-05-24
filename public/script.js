@@ -143,3 +143,50 @@ let input = document.querySelector('input')
 const loadingState = document.querySelector('span.loading')
 const emptyState = document.querySelector('span.empty')
 const errorState = document.querySelector('span.offline')
+
+document.querySelector('form').addEventListener('submit', (event) => {
+  event.preventDefault()
+
+  if (input.value) {
+    ioServer.emit('message', input.value)
+    input.value = ''
+  }
+})
+
+//states
+ioServer.on('history', (history) => {
+ 
+  if (history.length === 0) {
+    loadingState.style.display = 'none'
+    emptyState.style.display = 'inline'
+
+    
+  } else {
+    loadingState.style.display = 'none'
+    emptyState.style.display = 'none'
+    history.forEach((message) => {
+      addMessage(message)
+    })
+  }
+})
+
+ioServer.on('message', (message) => {
+  loadingState.style.display = 'none'
+  emptyState.style.display = 'none'
+  addMessage(message)
+})  
+
+ioServer.io.on('error', (error) => {
+  loadingState.style.display = 'none'
+  emptyState.style.display = 'none'
+  errorState.style.display = 'inline'
+})
+
+ioServer.io.on('reconnect_attempt', (attempt) => {
+  console.log('attempting reconnection')
+})
+
+function addMessage(message) {
+  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
+  messages.scrollTop = messages.scrollHeight
+}
