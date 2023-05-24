@@ -139,3 +139,7 @@ searchButton.forEach(button => {
 let ioServer = io()
 let messages = document.querySelector('section ul')
 let input = document.querySelector('input')
+
+const loadingState = document.querySelector('span.loading')
+const emptyState = document.querySelector('span.empty')
+const errorState = document.querySelector('span.offline')
