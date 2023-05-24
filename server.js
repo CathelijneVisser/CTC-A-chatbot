@@ -1,9 +1,10 @@
 import * as path from 'path'
 
 import { Server } from 'socket.io'
-import { createServer } from 'http'
-import express from "express"
+import { createServer, request } from 'http'
+import express, { response } from 'express'
 import dotenv from 'dotenv'
+import { Configuration, OpenAIApi } from 'openai'
 
 const app = express()
 const http = createServer(app)
@@ -38,6 +39,15 @@ server.get("/", (request, response) => {
     let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((data) => {
     response.render("index", {smartzones: data.smartzones})
+    })
+  })
+
+//manage - get
+
+server.get("/manage", (request, response) => {
+   let urlSmartzones = `${process.env.API_URL}/smartzones`
+  fetchJson(urlSmartzones).then((data) => {
+    response.render("manage", {smartzones: data.smartzones})
     })
   })
 
@@ -88,25 +98,46 @@ server.post('/book', (request, response) => {
 
 
 //Chatbot
-let history = []
+let conversationHistory = []
 const historySize = 20
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 ioServer.on('connection', (client) => {
   console.log(`user ${client.id} connected`)
-  client.emit('history', history)
+  client.emit('history', conversationHistory)
 
-  client.on('message', (message) => {
-    while (history.length > historySize) {
-      history.shift()
+  client.on('message', async (message, callback) => {
+    try {
+      while (conversationHistory.length > historySize) {
+        conversationHistory.shift()
+      } 
+      conversationHistory.push({ role: "user", content: message })  
+      const completion = await openai.createChatCompletion({
+          model: "gpt-4",
+          messages: conversationHistory,
+        });
+
+        const response = completion.data.choices[0].message.content;
+        conversationHistory.push({ role: "assistant", content: response })
+
+      ioServer.emit('message', response)
+      callback()
+    } catch (error) {
+      console.error(error);
+      callback("Error: Unable to connect to the chatbot");
     }
-    history.push(message)
-    ioServer.emit('message', message)
   })
 
   client.on('disconnect', () => {
     console.log(`user ${client.id} disconnected`)
   })
 })
+
+
 
 
 
@@ -129,14 +160,7 @@ async function fetchJson(url) {
     .catch((error) => error)
 }
 
-/**
- * postJson() is a wrapper for the experimental node fetch api. It fetches the url
- * passed as a parameter using the POST method and the value from the body paramater
- * as a payload. It returns the response body parsed through json.
- * @param {*} url the api endpoint to address
- * @param {*} body the payload to send along
- * @returns the json response from the api endpoint
- */
+
 export async function postJson(url, body) {
   return await fetch(url, {
     method: "post",

@@ -146,10 +146,15 @@ const errorState = document.querySelector('span.offline')
 
 document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
-
+    const message = input.value
   if (input.value) {
-    ioServer.emit('message', input.value)
+    addMessage("user", message)
+    ioServer.emit('message', message, (error) => {
+        if (error) {
+         return alert(error)
+    })
     input.value = ''
+    input.value.focus()
   }
 })
 
@@ -173,7 +178,7 @@ ioServer.on('history', (history) => {
 ioServer.on('message', (message) => {
   loadingState.style.display = 'none'
   emptyState.style.display = 'none'
-  addMessage(message)
+  addMessage("cody", message)
 })  
 
 ioServer.io.on('error', (error) => {
@@ -186,7 +191,7 @@ ioServer.io.on('reconnect_attempt', (attempt) => {
   console.log('attempting reconnection')
 })
 
-function addMessage(message) {
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
+function addMessage(role, message) {
+  messages.appendChild(Object.assign(document.createElement('li'.classList.add(role)), { textContent: message }))
   messages.scrollTop = messages.scrollHeight
 }
