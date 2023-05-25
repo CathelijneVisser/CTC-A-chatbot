@@ -6,8 +6,8 @@ import express, { response } from 'express'
 import dotenv from 'dotenv'
 import { Configuration, OpenAIApi } from 'openai'
 
-const app = express()
-const http = createServer(app)
+const server = express()
+const http = createServer(server)
 const ioServer = new Server(http, {
   connectionStateRecovery: {
     maxDisconnectionDuration: 2 * 60 * 1000,
@@ -19,8 +19,6 @@ const ioServer = new Server(http, {
 //activeer .env
 dotenv.config()
 
-//maak een nieuwe express app
-const server = express()
 
 //views en public instellen
 server.use(express.static(path.resolve("public")))
@@ -142,7 +140,7 @@ ioServer.on('connection', (client) => {
 
 
 //poortnummer instellen
-server.set("port", process.env.PORT || 5689)
+server.set("port", process.env.PORT || 8000)
 
 //start de server
 server.listen(server.get("port"), "0.0.0.0", () => {

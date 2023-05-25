@@ -68,7 +68,8 @@ inputs.forEach(input => {
 
 
 // Map
-
+const checkMap = document.getElementById("map")
+if (checkMap){
 var map = L.map('map').setView([52.2129919, 5.2793703], 7)
 
 L.tileLayer('https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=6ws7wF90PofV2LnNfOXL', {
@@ -131,8 +132,8 @@ searchButton.forEach(button => {
 
 
     })
-});
-
+})
+}
 
 //Chatroom
 
@@ -147,16 +148,20 @@ const errorState = document.querySelector('span.offline')
 document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
     const message = input.value
+    console.log(message)
   if (input.value) {
+    console.log("made it in the if")
     addMessage("user", message)
-    ioServer.emit('message', message, (error) => {
-        if (error) {
-         return alert(error)
-    })
-    input.value = ''
-    input.value.focus()
-  }
-})
+    ioServer.emit('message', message, ((error) => {
+    if (error) {
+      return alert(error);
+    }
+
+    messageInput.value = "";
+    messageInput.focus();
+  })
+    
+)}})
 
 //states
 ioServer.on('history', (history) => {
