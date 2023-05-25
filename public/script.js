@@ -148,9 +148,7 @@ const errorState = document.querySelector('span.offline')
 document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
     const message = input.value
-    console.log(message)
   if (input.value) {
-    console.log("made it in the if")
     addMessage("user", message)
     ioServer.emit('message', message, ((error) => {
     if (error) {
@@ -167,13 +165,13 @@ document.querySelector('form').addEventListener('submit', (event) => {
 ioServer.on('history', (history) => {
  
   if (history.length === 0) {
-    loadingState.style.display = 'none'
-    emptyState.style.display = 'inline'
+    // loadingState.style.display = 'none'
+    // emptyState.style.display = 'inline'
 
     
   } else {
-    loadingState.style.display = 'none'
-    emptyState.style.display = 'none'
+    // loadingState.style.display = 'none'
+    // emptyState.style.display = 'none'
     history.forEach((message) => {
       addMessage(message)
     })
@@ -181,15 +179,15 @@ ioServer.on('history', (history) => {
 })
 
 ioServer.on('message', (message) => {
-  loadingState.style.display = 'none'
-  emptyState.style.display = 'none'
+  // loadingState.style.display = 'none'
+  // emptyState.style.display = 'none'
   addMessage("cody", message)
 })  
 
 ioServer.io.on('error', (error) => {
-  loadingState.style.display = 'none'
-  emptyState.style.display = 'none'
-  errorState.style.display = 'inline'
+  // loadingState.style.display = 'none'
+  // emptyState.style.display = 'none'
+  // errorState.style.display = 'inline'
 })
 
 ioServer.io.on('reconnect_attempt', (attempt) => {
@@ -197,6 +195,6 @@ ioServer.io.on('reconnect_attempt', (attempt) => {
 })
 
 function addMessage(role, message) {
-  messages.appendChild(Object.assign(document.createElement('li'.classList.add(role)), { textContent: message }))
+  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
   messages.scrollTop = messages.scrollHeight
 }

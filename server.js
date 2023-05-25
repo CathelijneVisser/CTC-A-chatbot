@@ -4,7 +4,11 @@ import { Server } from 'socket.io'
 import { createServer, request } from 'http'
 import express, { response } from 'express'
 import dotenv from 'dotenv'
-import { Configuration, OpenAIApi } from 'openai'
+import { Configuration, OpenAIApi } from "openai"
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+})
+const openai = new OpenAIApi(configuration)
 
 const server = express()
 const http = createServer(server)
@@ -15,8 +19,6 @@ const ioServer = new Server(http, {
   },
 })
 
-
-//activeer .env
 dotenv.config()
 
 
@@ -99,33 +101,25 @@ server.post('/book', (request, response) => {
 let conversationHistory = []
 const historySize = 20
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
 ioServer.on('connection', (client) => {
   console.log(`user ${client.id} connected`)
   client.emit('history', conversationHistory)
-
   client.on('message', async (message, callback) => {
     try {
       while (conversationHistory.length > historySize) {
         conversationHistory.shift()
       } 
-      conversationHistory.push({ role: "user", content: message })  
+      conversationHistory.push({ role: "user", content: message }) 
       const completion = await openai.createChatCompletion({
           model: "gpt-4",
-          messages: conversationHistory,
-        });
-
+          prompt: "hello world",
+        })
         const response = completion.data.choices[0].message.content;
         conversationHistory.push({ role: "assistant", content: response })
 
       ioServer.emit('message', response)
       callback()
     } catch (error) {
-      console.error(error);
       callback("Error: Unable to connect to the chatbot");
     }
   })
@@ -143,7 +137,7 @@ ioServer.on('connection', (client) => {
 server.set("port", process.env.PORT || 8000)
 
 //start de server
-server.listen(server.get("port"), "0.0.0.0", () => {
+http.listen(server.get("port"), "0.0.0.0", () => {
   console.log(`Application started on http://localhost:${server.get("port")}`)
 })
 
