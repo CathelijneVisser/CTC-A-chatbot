@@ -135,6 +135,8 @@ searchButton.forEach(button => {
 })
 }
 
+//chatroom togglen
+
 //Chatroom
 
 let ioServer = io()
@@ -150,13 +152,14 @@ document.querySelector('form').addEventListener('submit', (event) => {
     const message = input.value
   if (input.value) {
     addMessage("user", message)
+    messageInput.value = ""
+    messageInput.focus()
     ioServer.emit('message', message, ((error) => {
     if (error) {
       return alert(error);
     }
 
-    messageInput.value = "";
-    messageInput.focus();
+    
   })
     
 )}})

@@ -10,6 +10,12 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
+// const completion = await openai.createCompletion({
+//   model: "text-davinci-003",
+//   prompt: "Hello world",
+// })
+// console.log(completion.data.choices[0].text)
+
 const server = express()
 const http = createServer(server)
 const ioServer = new Server(http, {
