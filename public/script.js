@@ -152,35 +152,18 @@ document.querySelector('form').addEventListener('submit', (event) => {
     const message = input.value
   if (input.value) {
     addMessage("user", message)
-    messageInput.value = ""
-    messageInput.focus()
     ioServer.emit('message', message, ((error) => {
     if (error) {
       return alert(error);
     }
-
+    input.value = ""
+    input.value.focus()
     
   })
     
 )}})
 
 //states
-ioServer.on('history', (history) => {
- 
-  if (history.length === 0) {
-    // loadingState.style.display = 'none'
-    // emptyState.style.display = 'inline'
-
-    
-  } else {
-    // loadingState.style.display = 'none'
-    // emptyState.style.display = 'none'
-    history.forEach((message) => {
-      addMessage(message)
-    })
-  }
-})
-
 ioServer.on('message', (message) => {
   // loadingState.style.display = 'none'
   // emptyState.style.display = 'none'
@@ -198,6 +181,10 @@ ioServer.io.on('reconnect_attempt', (attempt) => {
 })
 
 function addMessage(role, message) {
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
+  console.log(role)
+  var li = document.createElement('li')
+  li.textContent = message
+  li.classList.add(role) 
+  messages.appendChild(li)
   messages.scrollTop = messages.scrollHeight
 }

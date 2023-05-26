@@ -5,16 +5,14 @@ import { createServer, request } from 'http'
 import express, { response } from 'express'
 import dotenv from 'dotenv'
 import { Configuration, OpenAIApi } from "openai"
+
+dotenv.config()
+
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 })
 const openai = new OpenAIApi(configuration)
 
-// const completion = await openai.createCompletion({
-//   model: "text-davinci-003",
-//   prompt: "Hello world",
-// })
-// console.log(completion.data.choices[0].text)
 
 const server = express()
 const http = createServer(server)
@@ -25,7 +23,6 @@ const ioServer = new Server(http, {
   },
 })
 
-dotenv.config()
 
 
 //views en public instellen
@@ -107,26 +104,27 @@ server.post('/book', (request, response) => {
 let conversationHistory = []
 const historySize = 20
 
-ioServer.on('connection', (client) => {
+ioServer.on('connection', (client) => { //als er connectie gemaakt word
   console.log(`user ${client.id} connected`)
-  client.emit('history', conversationHistory)
-  client.on('message', async (message, callback) => {
+  client.emit('history', conversationHistory)  //history ophalen
+  client.on('message', async (message, callback) => { //als er iets binnenkomt
     try {
-      while (conversationHistory.length > historySize) {
-        conversationHistory.shift()
+      while (conversationHistory.length > historySize) {   //als history vol zit
+        conversationHistory.shift()  //history legen
       } 
-      conversationHistory.push({ role: "user", content: message }) 
-      const completion = await openai.createChatCompletion({
-          model: "gpt-4",
-          prompt: "hello world",
+      conversationHistory.push({ role: "user", content: message })  //zet binnenkoment message in history
+      const completion = await openai.createChatCompletion({   //ai aanroepen
+          model: "gpt-3.5-turbo",
+          messages: conversationHistory,  //history aan ai vragen
         })
-        const response = completion.data.choices[0].message.content;
-        conversationHistory.push({ role: "assistant", content: response })
-
-      ioServer.emit('message', response)
+        const response = completion.data.choices[0].message.content //ai data meegeven aan response
+        conversationHistory.push({ role: "assistant", content: response })  //ai response naar history
+        console.log(response)
+      ioServer.emit('message', response)  //ai message naar client sturen
       callback()
-    } catch (error) {
-      callback("Error: Unable to connect to the chatbot");
+    } catch (error) { //als er een error is
+      console.error(error.response.data)
+      callback("Error: Unable to connect to the chatbot") //error naar client sturen
     }
   })
 
