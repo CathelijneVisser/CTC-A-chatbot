@@ -151,12 +151,12 @@ document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
     const message = input.value
   if (input.value) {
+    input.value = ""
     addMessage("user", message)
     ioServer.emit('message', message, ((error) => {
     if (error) {
       return alert(error);
     }
-    input.value = ""
     input.value.focus()
     
   })
@@ -181,10 +181,12 @@ ioServer.io.on('reconnect_attempt', (attempt) => {
 })
 
 function addMessage(role, message) {
-  console.log(role)
   var li = document.createElement('li')
-  li.textContent = message
+  var p = document.createElement('p')
+
   li.classList.add(role) 
+  p.textContent = message
   messages.appendChild(li)
+  li.appendChild(p)
   messages.scrollTop = messages.scrollHeight
 }
