@@ -39,20 +39,20 @@ server.use(express.urlencoded({ extended: true }))
 //index - get
 
 server.get("/", (request, response) => {
-    let urlSmartzones = `${process.env.API_URL}/smartzones`
+  let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((data) => {
-    response.render("index", {smartzones: data.smartzones})
-    })
+    response.render("index", { smartzones: data.smartzones })
   })
+})
 
 //manage - get
 
 server.get("/manage", (request, response) => {
-   let urlSmartzones = `${process.env.API_URL}/smartzones`
+  let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((data) => {
-    response.render("manage", {smartzones: data.smartzones})
-    })
+    response.render("manage", { smartzones: data.smartzones })
   })
+})
 
 //book - get
 
@@ -63,8 +63,8 @@ server.get("/book", (request, response) => {
     let url = `${process.env.API_URL}/reservations?id=${id}`
     let time = request.query.time
     fetchJson(url).then((reservations) => {
-      let data = {smartzones: smartzones, reservations: reservations}
-      response.render("book", {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
+      let data = { smartzones: smartzones, reservations: reservations }
+      response.render("book", { smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time })
     })
   })
 })
@@ -77,24 +77,24 @@ server.post('/book', (request, response) => {
   request.body.timeEnd = request.body.dateEnd + 'T' + request.body.timeEnd + ':00Z';
 
   postJson(url, request.body).then((data) => {
-    let newReservation = { ... request.body }
+    let newReservation = { ...request.body }
 
     if (data.data.id.length > 0) {
-      response.redirect('/book?reservationPosted=true') 
+      response.redirect('/book?reservationPosted=true')
     } else {
       const errorMessage = data.message + "Some fields are not filled in (correctly)."
       const newData = { error: errorMessage, values: newReservation }
-      
+
       let urlSmartzones = `${process.env.API_URL}/smartzones`
-        fetchJson(urlSmartzones).then((smartzones) => {
-          let id = request.query.id
-          let time = request.query.time
-          let url = `${process.env.API_URL}/reservations?id=${id}`
-          fetchJson(url).then((reservations) => {
-            let data = {smartzones: smartzones, reservations: reservations, newData}
-            response.render("book", {smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time})
-          })
+      fetchJson(urlSmartzones).then((smartzones) => {
+        let id = request.query.id
+        let time = request.query.time
+        let url = `${process.env.API_URL}/reservations?id=${id}`
+        fetchJson(url).then((reservations) => {
+          let data = { smartzones: smartzones, reservations: reservations, newData }
+          response.render("book", { smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time })
         })
+      })
     }
   })
 })
@@ -111,16 +111,16 @@ ioServer.on('connection', (client) => { //als er connectie gemaakt word
     try {
       while (conversationHistory.length > historySize) {   //als history vol zit
         conversationHistory.shift()  //history legen
-      } 
+      }
       conversationHistory.push({ role: "user", content: message })  //zet binnenkoment message in history
       const completion = await openai.createChatCompletion({   //ai aanroepen
-          model: "gpt-3.5-turbo",
-          messages: conversationHistory,  //history aan ai vragen
-        })
-        const response = completion.data.choices[0].message.content //ai data meegeven aan response
-        conversationHistory.push({ role: "assistant", content: response })  //ai response naar history
-        console.log(response)
-      ioServer.emit('message', response)  //ai message naar client sturen
+        model: "gpt-3.5-turbo",
+        messages: conversationHistory,  //history aan ai vragen
+      })
+      const response = completion.data.choices[0].message.content //ai data meegeven aan response
+      conversationHistory.push({ role: "assistant", content: response })  //ai response naar history
+      console.log(response)
+      client.emit('message', response)  //ai message naar client sturen
       callback()
     } catch (error) { //als er een error is
       console.error(error.response.data)
