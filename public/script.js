@@ -3,11 +3,11 @@
 const infoIcons = document.querySelectorAll(".info-icon")
 
 infoIcons.forEach(infoIcon => {
-    infoIcon.addEventListener("click", (event) => {
-        const moreInfoText = document.getElementById(infoIcon.dataset.szid);
+  infoIcon.addEventListener("click", (event) => {
+    const moreInfoText = document.getElementById(infoIcon.dataset.szid);
 
-        moreInfoText.classList.toggle("show-more-info")
-    })
+    moreInfoText.classList.toggle("show-more-info")
+  })
 })
 
 
@@ -16,11 +16,11 @@ infoIcons.forEach(infoIcon => {
 const likeButtons = document.querySelectorAll(".favorite-button")
 
 likeButtons.forEach(likeButton => {
-    likeButton.addEventListener("click", heartAnimation)
-    
-    function heartAnimation () {
-        likeButton.classList.toggle("heart-animation")
-    }
+  likeButton.addEventListener("click", heartAnimation)
+
+  function heartAnimation() {
+    likeButton.classList.toggle("heart-animation")
+  }
 })
 
 
@@ -29,12 +29,12 @@ likeButtons.forEach(likeButton => {
 const searchButtons = document.querySelectorAll(".search-button")
 
 searchButtons.forEach(searchButton => {
-    searchButton.addEventListener("click", searchAnimation)
-    searchButton.addEventListener("animationend", searchAnimation)
-    
-    function searchAnimation () {
-        searchButton.classList.toggle("search-animation")
-    }
+  searchButton.addEventListener("click", searchAnimation)
+  searchButton.addEventListener("animationend", searchAnimation)
+
+  function searchAnimation() {
+    searchButton.classList.toggle("search-animation")
+  }
 })
 
 
@@ -46,8 +46,8 @@ const chatFrame = document.querySelector(".chatbot-frame")
 
 chatButton.addEventListener("click", chatToggle)
 chatCloseButton.addEventListener("click", chatToggle)
-    
-function chatToggle () {
+
+function chatToggle() {
   chatFrame.classList.toggle("chatbot-show")
 }
 
@@ -59,10 +59,10 @@ const dateOutput = document.getElementById("date-till");
 
 // Automaticly change ending date
 
-if(dateInput){
-    dateInput.onchange = () => {
-        dateOutput.value = dateInput.value
-    }
+if (dateInput) {
+  dateInput.onchange = () => {
+    dateOutput.value = dateInput.value
+  }
 }
 
 
@@ -71,82 +71,82 @@ if(dateInput){
 const inputs = document.querySelectorAll("input, select, textarea")
 
 inputs.forEach(input => {
-    input.addEventListener(
-        "invalid",
-        event => {
-            input.classList.add("invalid")
-        },
-        false
-    );
+  input.addEventListener(
+    "invalid",
+    event => {
+      input.classList.add("invalid")
+    },
+    false
+  );
 });
 
 
 // Map
 const checkMap = document.getElementById("map")
-if (checkMap){
-var map = L.map('map').setView([52.2129919, 5.2793703], 7)
+if (checkMap) {
+  var map = L.map('map').setView([52.2129919, 5.2793703], 7)
 
-L.tileLayer('https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=6ws7wF90PofV2LnNfOXL', {
+  L.tileLayer('https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=6ws7wF90PofV2LnNfOXL', {
     maxZoom: 19,
     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-}).addTo(map)
+  }).addTo(map)
 
-// Custom marker map
+  // Custom marker map
 
-var markerIcon = L.icon({
+  var markerIcon = L.icon({
     iconUrl: 'assets/img/Icon_search.svg',
-    iconSize:   [15, 19],
-    iconAnchor:  [0, 0],
-})
+    iconSize: [15, 19],
+    iconAnchor: [0, 0],
+  })
 
-// Longitude, latitude
+  // Longitude, latitude
 
-var WicherLat = [51.915775, 4.477979]
-var WafaLat = [51.9200524, 4.4660027]
-var KarelLat = [52.3653432, 4.864459999999999]
-var AhmedLat = [51.91511389999999, 4.3975444]
-var ManonLat = [51.9147605, 4.398279]
+  var WicherLat = [51.915775, 4.477979]
+  var WafaLat = [51.9200524, 4.4660027]
+  var KarelLat = [52.3653432, 4.864459999999999]
+  var AhmedLat = [51.91511389999999, 4.3975444]
+  var ManonLat = [51.9147605, 4.398279]
 
-// Markers
+  // Markers
 
-var Wicher = L.marker(WicherLat, {icon: markerIcon})
-var Wafa = L.marker(WafaLat, {icon: markerIcon})
-var Karel = L.marker(KarelLat, {icon: markerIcon})
-var Ahmed = L.marker(AhmedLat, {icon: markerIcon})
-var Manon = L.marker(ManonLat, {icon: markerIcon})
-var markers = L.layerGroup([Wicher, Wafa, Karel, Ahmed, Manon]).addTo(map)
+  var Wicher = L.marker(WicherLat, { icon: markerIcon })
+  var Wafa = L.marker(WafaLat, { icon: markerIcon })
+  var Karel = L.marker(KarelLat, { icon: markerIcon })
+  var Ahmed = L.marker(AhmedLat, { icon: markerIcon })
+  var Manon = L.marker(ManonLat, { icon: markerIcon })
+  var markers = L.layerGroup([Wicher, Wafa, Karel, Ahmed, Manon]).addTo(map)
 
-// Link to zone
+  // Link to zone
 
-var searchButton = document.querySelectorAll(".search-button")
+  var searchButton = document.querySelectorAll(".search-button")
 
-searchButton.forEach(button => {
-    button.addEventListener("click", function() {
-        const data = this.dataset.point
+  searchButton.forEach(button => {
+    button.addEventListener("click", function () {
+      const data = this.dataset.point
 
-        if (data == "Wicher") {
-             map.flyTo(WicherLat, 16)
-        }
+      if (data == "Wicher") {
+        map.flyTo(WicherLat, 16)
+      }
 
-        if (data == "Wafa") {
-             map.flyTo(WafaLat, 16)
-        }
+      if (data == "Wafa") {
+        map.flyTo(WafaLat, 16)
+      }
 
-        if (data == "Karel") {
-             map.flyTo(KarelLat, 16)
-        }
+      if (data == "Karel") {
+        map.flyTo(KarelLat, 16)
+      }
 
-        if (data == "Ahmed") {
-             map.flyTo(AhmedLat, 16)
-        }
+      if (data == "Ahmed") {
+        map.flyTo(AhmedLat, 16)
+      }
 
-        if (data == "Manon") {
-             map.flyTo(ManonLat, 16)
-        }
+      if (data == "Manon") {
+        map.flyTo(ManonLat, 16)
+      }
 
 
     })
-})
+  })
 }
 
 //Chatroom
@@ -155,47 +155,53 @@ let ioServer = io()
 let messages = document.querySelector('article ul')
 let input = document.querySelector('input')
 
-const loadingState = document.querySelector('div.loading')
 const emptyState = document.querySelector('div.empty')
 const errorState = document.querySelector('div.offline')
 
 document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
-    const message = input.value
+  const message = input.value
   if (input.value) {
     input.value = ""
     addMessage("user", message)
     ioServer.emit('message', message, ((error) => {
-    if (error) {
-      return alert(error);
-    }    
-  })
-)}})
+      if (error) {
+        return alert(error)
+      }
+    })
+    )
+  }
+})
 
 //States
+errorState.style.display = 'none'
+
 ioServer.on('message', (message) => {
-  // loadingState.style.display = 'none'
-  // emptyState.style.display = 'none'
   addMessage("cody", message)
-})  
+})
 
 ioServer.io.on('error', (error) => {
-  // loadingState.style.display = 'none'
-  // emptyState.style.display = 'none'
-  // errorState.style.display = 'inline'
+  errorState.style.display = 'inline'
 })
 
 ioServer.io.on('reconnect_attempt', (attempt) => {
+  errorState.style.display = 'inline'
   console.log('attempting reconnection')
+})
+
+ioServer.io.on('reconnect', (attempt) => {
+  errorState.style.display = 'none'
 })
 
 function addMessage(role, message) {
   var li = document.createElement('li')
   var p = document.createElement('p')
 
-  li.classList.add(role) 
+  li.classList.add(role)
   p.textContent = message
   messages.appendChild(li)
   li.appendChild(p)
   messages.scrollTop = messages.scrollHeight
+
+  emptyState.style.display = 'none'
 }
