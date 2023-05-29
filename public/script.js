@@ -37,6 +37,7 @@ searchButtons.forEach(searchButton => {
     }
 })
 
+
 // Chatbot button
 
 const chatButton = document.querySelector(".chat-button")
@@ -49,6 +50,7 @@ chatCloseButton.addEventListener("click", chatToggle)
 function chatToggle () {
   chatFrame.classList.toggle("chatbot-show")
 }
+
 
 // Current date
 
@@ -168,11 +170,8 @@ document.querySelector('form').addEventListener('submit', (event) => {
     ioServer.emit('message', message, ((error) => {
     if (error) {
       return alert(error);
-    }
-    input.value.focus()
-    
+    }    
   })
-    
 )}})
 
 //states
