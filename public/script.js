@@ -149,17 +149,15 @@ searchButton.forEach(button => {
 })
 }
 
-//chatroom togglen
-
 //Chatroom
 
 let ioServer = io()
-let messages = document.querySelector('section ul')
+let messages = document.querySelector('article ul')
 let input = document.querySelector('input')
 
-const loadingState = document.querySelector('span.loading')
-const emptyState = document.querySelector('span.empty')
-const errorState = document.querySelector('span.offline')
+const loadingState = document.querySelector('div.loading')
+const emptyState = document.querySelector('div.empty')
+const errorState = document.querySelector('div.offline')
 
 document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault()
@@ -174,7 +172,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
   })
 )}})
 
-//states
+//States
 ioServer.on('message', (message) => {
   // loadingState.style.display = 'none'
   // emptyState.style.display = 'none'
