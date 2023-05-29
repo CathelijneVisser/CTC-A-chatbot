@@ -347,6 +347,8 @@ h2 {
 .book {
     padding: 2rem;
     overflow-y: scroll;
+    position: relative;
+    z-index: 0;
 }
 
 h1 {
