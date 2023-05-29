@@ -37,6 +37,17 @@ searchButtons.forEach(searchButton => {
     }
 })
 
+// Chatbot button
+
+const chatButton = document.querySelector(".chat-button")
+const chatFrame = document.querySelector(".chatbot-frame")
+console.log(chatButton)
+
+chatButton.addEventListener("click", chatToggle)
+    
+function chatToggle () {
+  chatFrame.classList.toggle("chatbot-show")
+}
 
 // Current date
 

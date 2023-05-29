@@ -35,8 +35,10 @@
     --white-color: #fff;
     --bg-blue: #d8e9f2;
     --bg-grey: #f6f6fc;
+    --border-radius: 1rem;
     --border-form: solid 1px var(--black-color);
     --border-radius-form: 0.3rem;
+    --border-msg: solid 3px var(--purple-color);
 }
 
 * {
@@ -87,7 +89,7 @@ body {
     left: 10%;
     top: 10%;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
 }
 
@@ -104,6 +106,7 @@ header {
 }
 
 button {
+    cursor: pointer;
     border: none;
     background: none;
     border-radius: 0;
@@ -240,7 +243,6 @@ h2 {
 
 /* Icons */
 .info-icon {
-    cursor: pointer;
     position: absolute;
     left: 0.5rem;
     top: 0.5rem;
@@ -250,7 +252,6 @@ h2 {
     height: fit-content;
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 .heart-icon path:first-of-type {
@@ -327,6 +328,11 @@ h2 {
 /***********************************************************************************************************************/
 /* Map */
 /***********************************************************************************************************************/
+
+.map {
+    position: relative;
+    z-index: 0;
+}
 
 #map {
     width: 100%;
@@ -451,6 +457,13 @@ input.invalid, select.invalid {
 
 /* Chat open button */
 .chat-button {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 2;
+}
+
+.chat-button, .send-message-button {
     border-radius: 50%;
     background: var(--gradient-color);
     width: 41.4px;
@@ -464,10 +477,99 @@ input.invalid, select.invalid {
 }
 
 /* Chat frame */
+.chatbot-frame {
+    display: none;
+}
 
+.chatbot-show {
+    display: block;
+    width: 20rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--black-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-grey);
+    padding: 0.5rem 1rem;
+    position: absolute;
+    right: calc(2rem + 41.4px + 2rem);
+    bottom: 2rem;
+    z-index: 2;
+}
+
+.chatbot-frame header {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.chatbot-frame ul {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--white-color);
+    padding: 0.5rem;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-frame li {
+    list-style: none;
+    padding: 0.5rem;
+    border: var(--border-msg);
+    border-radius: 1rem;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    margin-bottom: 0.5rem;
+    min-width: 2rem;
+    width: fit-content;
+}
+
+.cody {
+    align-self: flex-start;
+    margin-right: 2rem;
+}
+
+.user {
+    align-self: flex-end;
+    margin-left: 2rem;
+}
 
 /* Send message */
+.chatbot-frame form {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+}
 
+.chatbot-frame form input {
+    width: 85%;
+    height: 30px;
+}
+
+.send-message-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.send-message-button:hover {
+    scale: 1.1;
+}
 
 
 /***********************************************************************************************************************/
