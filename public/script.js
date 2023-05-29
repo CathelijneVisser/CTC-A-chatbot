@@ -4,7 +4,7 @@ const infoIcons = document.querySelectorAll(".info-icon")
 
 infoIcons.forEach(infoIcon => {
   infoIcon.addEventListener("click", (event) => {
-    const moreInfoText = document.getElementById(infoIcon.dataset.szid);
+    const moreInfoText = document.getElementById(infoIcon.dataset.szid)
 
     moreInfoText.classList.toggle("show-more-info")
   })
@@ -54,8 +54,8 @@ function chatToggle() {
 
 // Current date
 
-const dateInput = document.getElementById("date-from");
-const dateOutput = document.getElementById("date-till");
+const dateInput = document.getElementById("date-from")
+const dateOutput = document.getElementById("date-till")
 
 // Automaticly change ending date
 
@@ -77,24 +77,24 @@ inputs.forEach(input => {
       input.classList.add("invalid")
     },
     false
-  );
-});
+  )
+})
 
 
 // Map
 const checkMap = document.getElementById("map")
 if (checkMap) {
-  var map = L.map('map').setView([52.2129919, 5.2793703], 7)
+  var map = L.map("map").setView([52.2129919, 5.2793703], 7)
 
-  L.tileLayer('https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=6ws7wF90PofV2LnNfOXL', {
+  L.tileLayer("https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=6ws7wF90PofV2LnNfOXL", {
     maxZoom: 19,
-    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+    attribution: "<a href="https://www.maptiler.com/copyright/" target="_blank">&copy MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy OpenStreetMap contributors</a>",
   }).addTo(map)
 
   // Custom marker map
 
   var markerIcon = L.icon({
-    iconUrl: 'assets/img/Icon_search.svg',
+    iconUrl: "assets/img/Icon_search.svg",
     iconSize: [15, 19],
     iconAnchor: [0, 0],
   })
@@ -152,19 +152,19 @@ if (checkMap) {
 //Chatroom
 
 let ioServer = io()
-let messages = document.querySelector('article ul')
-let input = document.querySelector('input')
+let messages = document.querySelector("article ul")
+let input = document.querySelector("input")
 
-const emptyState = document.querySelector('div.empty')
-const errorState = document.querySelector('div.offline')
+const emptyState = document.querySelector("div.empty")
+const errorState = document.querySelector("div.offline")
 
-document.querySelector('form').addEventListener('submit', (event) => {
+document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault()
   const message = input.value
   if (input.value) {
     input.value = ""
     addMessage("user", message)
-    ioServer.emit('message', message, ((error) => {
+    ioServer.emit("message", message, ((error) => {
       if (error) {
         return alert(error)
       }
@@ -174,28 +174,28 @@ document.querySelector('form').addEventListener('submit', (event) => {
 })
 
 //States
-errorState.style.display = 'none'
+errorState.style.display = "none"
 
-ioServer.on('message', (message) => {
+ioServer.on("message", (message) => {
   addMessage("cody", message)
 })
 
-ioServer.io.on('error', (error) => {
-  errorState.style.display = 'inline'
+ioServer.io.on("error", (error) => {
+  errorState.style.display = "inline"
 })
 
-ioServer.io.on('reconnect_attempt', (attempt) => {
-  errorState.style.display = 'inline'
-  console.log('attempting reconnection')
+ioServer.io.on("reconnect_attempt", (attempt) => {
+  errorState.style.display = "inline"
+  console.log("attempting reconnection")
 })
 
-ioServer.io.on('reconnect', (attempt) => {
-  errorState.style.display = 'none'
+ioServer.io.on("reconnect", (attempt) => {
+  errorState.style.display = "none"
 })
 
 function addMessage(role, message) {
-  var li = document.createElement('li')
-  var p = document.createElement('p')
+  var li = document.createElement("li")
+  var p = document.createElement("p")
 
   li.classList.add(role)
   p.textContent = message
@@ -203,5 +203,5 @@ function addMessage(role, message) {
   li.appendChild(p)
   messages.scrollTop = messages.scrollHeight
 
-  emptyState.style.display = 'none'
+  emptyState.style.display = "none"
 }

@@ -40,8 +40,9 @@ server.use(express.urlencoded({ extended: true }))
 
 server.get('/', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
+  let pageTitle = "Smartzone's"
   fetchJson(urlSmartzones).then((data) => {
-    response.render('index', { smartzones: data.smartzones })
+    response.render('index', { smartzones: data.smartzones, pageTitle: pageTitle })
   })
 })
 
@@ -49,8 +50,9 @@ server.get('/', (request, response) => {
 
 server.get('/manage', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
+  let pageTitle = "Manage"
   fetchJson(urlSmartzones).then((data) => {
-    response.render('manage', { smartzones: data.smartzones })
+    response.render('manage', { smartzones: data.smartzones, pageTitle: pageTitle })
   })
 })
 
@@ -59,12 +61,13 @@ server.get('/manage', (request, response) => {
 server.get('/book', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((smartzones) => {
+    let pageTitle = "Reserve"
     let id = request.query.id
     let url = `${process.env.API_URL}/reservations?id=${id}`
     let time = request.query.time
     fetchJson(url).then((reservations) => {
       let data = { smartzones: smartzones, reservations: reservations }
-      response.render('book', { smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time })
+      response.render('book', { smartzones: data.smartzones.smartzones, selectedSmartzoneId: id, time: time, pageTitle: pageTitle })
     })
   })
 })
