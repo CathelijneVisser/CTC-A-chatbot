@@ -530,7 +530,6 @@ input.invalid, select.invalid {
     list-style: none;
     padding: 0.5rem;
     border: var(--border-msg);
-    border-radius: 1rem;
     background-color: var(--white-color);
     color: var(--black-color);
     margin-bottom: 0.5rem;
@@ -541,11 +540,13 @@ input.invalid, select.invalid {
 .cody {
     align-self: flex-start;
     margin-right: 2rem;
+    border-radius: 1rem 1rem 1rem 0;
 }
 
 .user {
     align-self: flex-end;
     margin-left: 2rem;
+    border-radius: 1rem 1rem 0 1rem;
 }
 
 /* Send message */
