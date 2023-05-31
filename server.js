@@ -141,6 +141,7 @@ ioServer.on('connection', (client) => { //als er connectie gemaakt word
 
 
 //poortnummer instellen
+
 server.set('port', process.env.PORT || 8000)
 
 //start de server
