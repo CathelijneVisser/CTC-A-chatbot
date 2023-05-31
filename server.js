@@ -3,6 +3,7 @@ import * as path from 'path'
 import { Server } from 'socket.io'
 import { createServer, request } from 'http'
 import express, { response } from 'express'
+import fetch from 'node-fetch'
 import dotenv from 'dotenv'
 import { Configuration, OpenAIApi } from 'openai'
 
