@@ -40,7 +40,7 @@ server.use(express.urlencoded({ extended: true }))
 
 server.get('/', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
-  let pageTitle = "Smartzone's"
+  let pageTitle = "Search - Coding the Curbs"
   fetchJson(urlSmartzones).then((data) => {
     response.render('index', { smartzones: data.smartzones, pageTitle: pageTitle })
   })
@@ -50,7 +50,7 @@ server.get('/', (request, response) => {
 
 server.get('/manage', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
-  let pageTitle = "Manage"
+  let pageTitle = "Manage - Coding the Curbs"
   fetchJson(urlSmartzones).then((data) => {
     response.render('manage', { smartzones: data.smartzones, pageTitle: pageTitle })
   })
@@ -61,7 +61,7 @@ server.get('/manage', (request, response) => {
 server.get('/book', (request, response) => {
   let urlSmartzones = `${process.env.API_URL}/smartzones`
   fetchJson(urlSmartzones).then((smartzones) => {
-    let pageTitle = "Reserve"
+    let pageTitle = "Book - Coding the Curbs"
     let id = request.query.id
     let url = `${process.env.API_URL}/reservations?id=${id}`
     let time = request.query.time
