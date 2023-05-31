@@ -155,7 +155,6 @@ let ioServer = io()
 let messages = document.querySelector("article ul")
 let input = document.querySelector("input")
 
-const emptyState = document.querySelector("div.empty")
 const errorState = document.querySelector("div.offline")
 
 document.querySelector("form").addEventListener("submit", (event) => {
@@ -202,6 +201,4 @@ function addMessage(role, message) {
   messages.appendChild(li)
   li.appendChild(p)
   messages.scrollTop = messages.scrollHeight
-
-  emptyState.style.display = "none"
 }
