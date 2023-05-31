@@ -180,16 +180,19 @@ ioServer.on("message", (message) => {
 })
 
 ioServer.io.on("error", (error) => {
-  errorState.style.display = "inline"
+  errorState.style.display = "block"
+  messages.style.display = "none"
 })
 
 ioServer.io.on("reconnect_attempt", (attempt) => {
-  errorState.style.display = "inline"
+  errorState.style.display = "block"
+  messages.style.display = "none"
   console.log("attempting reconnection")
 })
 
 ioServer.io.on("reconnect", (attempt) => {
   errorState.style.display = "none"
+  messages.style.display = "block"
 })
 
 function addMessage(role, message) {
