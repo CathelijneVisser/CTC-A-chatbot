@@ -578,6 +578,30 @@ input.invalid, select.invalid {
     scale: 1.1;
 }
 
+/* States */
+.empty {
+    opacity: 0;
+    animation: 1s fadeIn;
+    animation-fill-mode: forwards;
+}
+
+.offline {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--white-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.offline p {
+    max-width: 9rem;
+    text-align: center;
+}
 
 /***********************************************************************************************************************/
 /* Animations */
@@ -620,5 +644,16 @@ input.invalid, select.invalid {
 
     100% {
         transform: scaleY(1) translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-0.2rem);
+        opacity:0;
+    }
+    to {
+        transform: translateY(0);
+        opacity:1;
     }
 }
