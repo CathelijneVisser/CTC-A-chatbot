@@ -1,5 +1,5 @@
 # Coding the Curbs website
-Een website om een smartzone te zoeken en boeken.
+Een website om een smartzone te zoeken en boeken en vragen te stellen.
 
 ## Inhoudsopgave
 
@@ -15,13 +15,14 @@ Deze pagina is gemaakt voor de volgende userstory's:
 * "Als vervoerder wil ik een overzicht van smartzones in een stad kunnen bekijken, zodat ik kan zien waar ik kan parkeren om mijn goederen te laden/lossen"
 * "Als vervoerder wil ik onderweg vanuit mijn voertuig meer informatie over een smartzone kunnen bekijken, zodat ik kan zien of de zone geschikt is om mijn goederen te laden en/of lossen"
 * "Als vervoerder wil een smart zone kunnen reserveren, zodat ik mijn plek kan bevestigen"
+* "Als gebruiker wil ik een vraag kunnen stellen, zodat ik hulp kan krijgen"
 
 De eerste pagina is een overzichtspagina met de verschillende smartzones, die ook hun eigen detailslide hebben. Verder is een kaart te zien met de locaties van de zones. De tweede pagina is een pagina waar een reserveerformulier staat waar je de gewenste smartzone kunt boeken en je gegevens invult.
 
-<img src="https://github.com/CathelijneVisser/performance-matters-optimized-website/assets/112859814/da9639fa-216a-4ab3-a232-b5a8f689b395" alt="Desktop search pagina" width=100%><br>
-<img src="https://github.com/CathelijneVisser/performance-matters-optimized-website/assets/112859814/3711dd7c-5ec1-4b6a-92db-1f158b923396" alt="Desktop book pagina" width=100%>
+<img src="https://github.com/CathelijneVisser/CTC-A-chatbot/assets/112859814/86b4d081-cfc4-46c2-af4a-3859484f7bc6" alt="Desktop search pagina" width=100%><br>
+<img src="https://github.com/CathelijneVisser/CTC-A-chatbot/assets/112859814/4ca3eeb6-4933-4a4b-8c3c-17a0eb17b7f5" alt="Desktop book pagina" width=100%>
 
-De website vind je [hier](https://erin-cheerful-cobra.cyclic.app).
+De website vind je [hier](https://ctc-a.adaptable.app).
 
 ## 💻 Gebruik
 Deze website bestaat uit meerdere delen. Aan de linkerkant staat een overzicht van alle smartzones. Aan de rechterkant staat de kaart of het formulier om te kunnen reserveren.
@@ -55,25 +56,29 @@ Er zijn drie manieren om met het formulier te beginnen:
 2. Op de 'Book now' knop van een smartzone klikken. In het formulier worden al de smartzone en de start datum ingevuld.
 3. Op de 'Book later' knop van een smartzone klikken. In het formulier wordt al de smartzone ingevuld.
 
+Op elke pagina is een chatbot te vinden om vragen te stellen:
+
+<img src="https://github.com/CathelijneVisser/CTC-A-chatbot/assets/112859814/8b46988e-79af-44be-9234-12f813cd5862" alt="" width=300px>
+
 ## 📌 Kenmerken
-Voor dit project heb we met node.js, express en ejs gewerkt. Daarnaast heb ik ook gebruik gemaakt van de JavaScript library Leaflet en maptiler.
+Voor dit project heb we met node.js, express en ejs gewerkt. Daarnaast is er ook gebruik gemaakt van de JavaScript library Leaflet en maptiler.
 
-HTML is ondergebracht in partials die door middel van EJS aan een grotere pagina vastzit. 
+HTML is ondergebracht in partials die door middel van EJS aan een grotere pagina vastzitten. 
 
-Met behulp van CSS zijn er SVGs geanimeerd met keyframes.
+Met behulp van CSS zijn er SVG's geanimeerd met keyframes.
 
-In JavaScript hebben een invalid statement voor het formulier gemaakt. Hierdoor kijkt het formulier pas als je op de submit knop hebt gedruk of alles is ingevuld. 
+In JavaScript hebben we een invalid statement voor het formulier gemaakt. Hierdoor kijkt het formulier pas als je op de submit knop hebt gedruk of alles is ingevuld. 
 
 Met NODE hebben we de pagina's een route gegeven waardoor ze de informatie uit de API krijgen en informatie naar de API kunnen sturen.
 
-Door EJS kunnen we JavaScript in de HTML gebruiken. Hierdoor kunnnen we in het formulier kijken naar welke datum vandaag is en ervoor zorgen dat dat de minimum datum vandaag is.
+Door EJS kunnen we JavaScript in de HTML gebruiken. Hierdoor kunnnen we in het formulier kijken naar welke datum vandaag is en ervoor zorgen dat er geen datum in het verleden geselecteerd kan worden.
 
-Voor de kaart hebben we Leaflet gebruikt. Hiermee kunnen we kunnen we makkelijk een kaart maken met markers die klikbaar zijn.
+Voor de kaart hebben we Leaflet gebruikt. Hiermee kunnen we makkelijk een kaart maken met markers die klikbaar zijn.
 
-De chat is gemaakt met socket.io en chat gpt. Hier door kun je een vraag stellen waar automatisch antwoord op word gegeven.
+De chat is gemaakt met socket.io en chat-gpt. Hierdoor kun je een vraag stellen waar automatisch antwoord op wordt gegeven.
+
 ## ⚙️ Installatie
 Om (verder) te kunnen werken aan dit project, moet je de volgende stappen volgen:
-
 
 <ol>
  <li> Instaleer node versie 18.15.0
@@ -92,7 +97,7 @@ Let op, er is gebruik gemaakt van een .env bestand.
 * [Leaflet](https://leafletjs.com/)
 * [Maptiler](https://www.maptiler.com/)
 * [socket.io](https://socket.io/get-started/chat)
-* [openai](https://www.npmjs.com/package/openai)
+* [Openai](https://www.npmjs.com/package/openai)
 * [Front-End Performance Checklist](https://www.smashingmagazine.com/2021/01/front-end-performance-2021-free-pdf-checklist/)
 * Informatie uit de colleges van FDND
 
