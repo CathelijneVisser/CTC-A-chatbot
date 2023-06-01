@@ -70,6 +70,7 @@ Door EJS kunnen we JavaScript in de HTML gebruiken. Hierdoor kunnnen we in het f
 
 Voor de kaart hebben we Leaflet gebruikt. Hiermee kunnen we kunnen we makkelijk een kaart maken met markers die klikbaar zijn.
 
+De chat is gemaakt met socket.io en chat gpt. Hier door kun je een vraag stellen waar automatisch antwoord op word gegeven.
 ## ⚙️ Installatie
 Om (verder) te kunnen werken aan dit project, moet je de volgende stappen volgen:
 
@@ -78,9 +79,9 @@ Om (verder) te kunnen werken aan dit project, moet je de volgende stappen volgen
  <li> Instaleer node versie 18.15.0
  <li> Clone deze repository
  <li> Open de terminal (CTRL + `)
- <li> Type 'npm install'
+ <li> Type 'npm install express ejs dotenv openai socket.io'
  <li> Je ziet nu de node_modules map
- <li> Maak een .env bestand
+ <li> Maak een .env bestand met beide variable die in de example.env staan
  <li> Type in terminal 'npm start'
  <li> Klik link localhost
 </ol>
@@ -90,6 +91,8 @@ Let op, er is gebruik gemaakt van een .env bestand.
 ## 📁 Bronnen
 * [Leaflet](https://leafletjs.com/)
 * [Maptiler](https://www.maptiler.com/)
+* [socket.io](https://socket.io/get-started/chat)
+* [openai](https://www.npmjs.com/package/openai)
 * [Front-End Performance Checklist](https://www.smashingmagazine.com/2021/01/front-end-performance-2021-free-pdf-checklist/)
 * Informatie uit de colleges van FDND
 
